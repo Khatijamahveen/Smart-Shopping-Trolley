@@ -17,10 +17,10 @@ A self-contained RFID-based automated billing system that eliminates conventiona
 - **Protocols:** SPI, I2C
 
 ## 🏗️ System Architecture
-[Insert Block Diagram Image Here]
+![image](https://github.com/Khatijamahveen/SMARTSHOPPINGTROLLEYWITHAUTOMATEDBILLING/blob/main/System_Architecture.png)
 
 ## 📊 Results & Validation
-[Insert Accuracy Chart + Timing Comparison Image Here]
+![image](https://github.com/Khatijamahveen/SMARTSHOPPINGTROLLEYWITHAUTOMATEDBILLING/blob/main/Results.png)
 
 ## 🔬 Research Impact
 This project demonstrates the feasibility of a low-infrastructure, standalone alternative to conventional checkout systems. Currently under review at **IEEE Sensors**.
