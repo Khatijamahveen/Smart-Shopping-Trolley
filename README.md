@@ -64,19 +64,19 @@ Buzzer + LED
 
 **System Architecture**
 
-<img src="Images/Proposed_System_Architecture....png" alt="Proposed System Architecture" width="650"/>
+<img src="Images/Proposed_System_Architecture.png" alt="Proposed System Architecture" width="500"/>
 
 **Circuit Diagram**
 
-<img src="Images/Circuit_Diagram.jpeg" alt="Circuit Diagram" width="650"/>
+<img src="Images/Circuit_Diagram.jpeg" alt="Circuit Diagram" width="500"/>
 
 **Operational Flowchart**
 
-<img src="Images/Operational_Flowchart.png" alt="Operational Flowchart" width="650"/>
+<img src="Images/Operational_Flowchart.png" alt="Operational Flowchart" width="500"/>
 
 **Experimental Prototype**
 
-<img src="Images/Experimental_Prototype.jpeg" alt="Experimental Prototype" width="650"/>
+<img src="Images/Experimental_Prototype.jpeg" alt="Experimental Prototype" width="450"/>
 
 ---
 
@@ -104,15 +104,15 @@ A normal RFID scan therefore **adds** an item, while removal requires the additi
 
 **Initialization**
 
-<img src="Images/System_Initialization.jpeg" alt="System Initialization" width="500"/>
+<img src="Images/System_Initialization.jpeg" alt="System Initialization" width="350"/>
 
 **Product Addition**
 
-<img src="Images/Product_Addition.jpeg" alt="Product Addition" width="500"/>
+<img src="Images/Product_Addition.jpeg" alt="Product Addition" width="350"/>
 
 **Product Removal**
 
-<img src="Images/Product_Removal.jpeg" alt="Product Removal" width="500"/>
+<img src="Images/Product_Removal.jpeg" alt="Product Removal" width="350"/>
 
 ---
 
