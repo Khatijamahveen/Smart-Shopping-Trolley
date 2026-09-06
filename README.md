@@ -1,32 +1,29 @@
 # Smart Shopping Trolley with Automated Billing
 
-## 📌 Project Overview
-A self-contained RFID-based automated billing system that eliminates conventional checkout queues. Built for smart retail environments.
+### Embedded Systems • RFID • Low-Power Design • Real-Time Automated Billing • Retail Automation
 
-## 🎯 Key Achievements
-- ✅ **99.6% detection accuracy** across 500 scan trials (50 unique tags)
-- ✅ **99.8% billing accuracy** for baskets of 3-15 items
-- ✅ **77.5% reduction** in checkout time (8.0 min → 1.8 min)
-- ✅ **< 70mA current consumption** with 8-hour runtime
+> **This project details the design, implementation, and quantitative validation of a self-contained, battery-operated smart shopping trolley that resolves product identity and computes the running bill entirely at the point of shopping, removing the need for a separate checkout stage.**
 
-## 🔧 Technologies Used
-- **Microcontroller:** Arduino Nano
-- **RFID Module:** MFRC522
-- **Display:** 16×2 LCD (I2C)
-- **Programming:** Arduino C/C++
-- **Protocols:** SPI, I2C
+---
 
-## 🏗️ System Architecture
-![image](https://github.com/Khatijamahveen/SMARTSHOPPINGTROLLEYWITHAUTOMATEDBILLING/blob/main/System_Architecture.png)
+## 🔍 The Core Idea
+Long checkout lines remain one of the most persistent friction points in physical retail, especially during peak hours. Traditional barcode-based counters require direct line-of-sight scanning, which slows everything down. 
 
-## 📊 Results & Validation
-![image](https://github.com/Khatijamahveen/SMARTSHOPPINGTROLLEYWITHAUTOMATEDBILLING/blob/main/Results.png)
+This prototype uses RFID (Radio Frequency Identification) to bypass that bottleneck. Since RFID reads tags without requiring a direct line of sight, product detection happens faster and with fewer failed reads. The goal was to build a completely local, untethered system that doesn't depend on cloud servers or Wi-Fi—just clean, reliable embedded hardware.
 
-## 🔬 Research Impact
-This project demonstrates the feasibility of a low-infrastructure, standalone alternative to conventional checkout systems. Currently under review at **IEEE Sensors**.
+---
 
-## 👩‍💻 Author
-**Khatija Mahveen**
-- M.E. Embedded Systems, Osmania University (CGPA: 9.65/10)
-- DRDO Research Intern, RCI Hyderabad
-- Email: mahveenkhatija4@gmail.com
+## 🛠️ System Architecture
+The system is built around an Arduino Nano acting as the central controller. It interfaces with an MFRC522 RFID reader (13.56 MHz), a 16x2 I2C LCD, a rechargeable 18650 Li-ion battery (via a Type-C TP4056 module), a buzzer, and status LEDs.
+
+**Data Flow:**
+```text
+RFID Tag (Passive) 
+   ↓
+MFRC522 Reader (SPI Protocol)
+   ↓
+Arduino Nano (Local EEPROM Product Lookup)
+   ↓
+16x2 I2C LCD (Real-Time Bill Display)
+   ↓
+Buzzer + LED (Audio-Visual Feedback)
