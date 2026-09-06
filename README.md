@@ -1,121 +1,110 @@
-# Design and Implementation of a Low-Power RFID-Based Smart Shopping Trolley with Real-Time Automated Billing
+# Smart Shopping Trolley with Automated Billing
 
-### Embedded Systems • RFID • Low-Power Design • Real-Time Automated Billing • Retail Automation • IoT
+### Embedded Systems • RFID • Low-Power Design • Real-Time Automated Billing • Retail Automation
 
-> **This repository presents the design, implementation, and rigorous quantitative validation of a self-contained, battery-operated smart shopping trolley that resolves product identity and computes the running bill entirely at the point of shopping, removing the need for a separate checkout stage.**
+> **This repository documents the design, implementation, and rigorous quantitative validation of a self-contained, battery-operated smart shopping trolley that resolves product identity and computes the running bill entirely at the point of shopping—removing the need for a separate checkout stage.**
 
 ---
 
 ## 📄 Research Publication
-**Khatija Mahveen** (with co-authors Neeraja B. and Dr. T. Nagalaxmi). 
-*“Design and Implementation of a Low-Power RFID-Based Smart Shopping Trolley with Real-Time Automated Billing.”* 
-**Submitted to the 1st International Emerging Research and Technology Conference (INERTCON 2026).** 
-*Manuscript submitted, August 2026.*
+This work has been submitted for peer review at the **1st International Emerging Research and Technology Conference (INERTCON 2026)**.
+
+> **Khatija Mahveen**, Neeraja B., and Dr. T. Nagalaxmi. *“Design and Implementation of a Low-Power RFID-Based Smart Shopping Trolley with Real-Time Automated Billing.”* Manuscript submitted August 2026.
 
 ---
 
-## 💻 Hardware Components
-| Component | Specification | Purpose |
-| :--- | :--- | :--- |
-| Arduino Nano | ATmega328P | Main controller |
-| RFID Reader | MFRC522 (13.56 MHz) | Product identification |
-| RFID Tags | Passive Tags | Product data storage |
-| LCD Display | 16x2 I2C | Real-time billing display |
-| Push Buttons | Normally Open | Item addition/removal control |
-| Buzzer | 5V | Audio feedback |
-| LEDs | Red/Green | Visual status indication |
-| Battery | 18650 Li-ion | Portable power supply |
-| Charging Module | Type-C TP4056 | Battery charging |
+## 🔍 The Problem with Traditional Checkout
+Long checkout lines are a major friction point in physical retail. Barcode scanners require direct line-of-sight, which slows everything down, especially during peak hours. Manual billing also introduces human errors in price entry, product recognition, and item counting.
+
+## 💡 The Core Idea
+RFID (Radio Frequency Identification) solves this bottleneck. Because passive RFID tags don't require line-of-sight scanning, a reader can identify a product instantly as soon as it enters the trolley. By embedding an RFID reader into a standard shopping cart, the billing process happens *while* the customer shops—eliminating the wait at the counter entirely.
+
+This design focuses on **fully local, untethered operation**. It does not depend on Wi-Fi, cloud servers, or external computing infrastructure. It runs entirely on a sub-$10 microcontroller and a rechargeable battery.
 
 ---
 
-## ⚙️ Operational Algorithm
-The system follows a straightforward yet effective loop:
+## 🛠️ System Architecture
+The system is built around an **Arduino Nano (ATmega328P)** as the central processing unit. The hardware stack includes:
 
-1. Initialize Nano, RFID reader, LCD, and peripherals.
-2. Set running total to zero.
-3. Wait for RFID tag to appear.
-4. Read tag ID and look it up in the local EEPROM product table.
-5. **If found:**
-   - Retrieve product name and price.
-   - Add price to running total.
-   - Display on LCD.
-   - Trigger buzzer + LED.
-6. **If remove button is pressed:**
-   - Read tag again.
-   - Subtract price from total.
-   - Refresh LCD display.
-7. Repeat until shopping session ends.
-8. Display final bill.
+- **MFRC522 RFID Reader (13.56 MHz)** – Detects passive tags on products.
+- **16x2 LCD with I2C Interface** – Displays real-time billing updates.
+- **18650 Li-ion Battery + Type-C TP4056 Charging Module** – Provides untethered, portable power.
+- **Push Button, Buzzer, and LEDs** – Provide user feedback and item removal control.
 
----
+```text
+RFID Tag (Passive)
+      ↓
+MFRC522 Reader (SPI Protocol)
+      ↓
+Arduino Nano (Local EEPROM Lookup)
+      ↓
+16x2 I2C LCD (Real-Time Bill Display)
+      ↓
+Buzzer + LED (Audio-Visual Confirmation)
 
-## 🧮 Mathematical Model
-Let \( P_i \) be the price of the i-th product and \( N \) be the total number of products. The total bill \( T \) is:
 
-\[
-T = \sum_{i=1}^{N} P_i
-\]
+### 🧠 The "Two-Step" Removal Mechanism
+A key feature of this design is the two-step item removal process. Unlike other RFID trolleys where a single scan can accidentally remove an item, this system requires:
 
-For item removal:
+1. Pressing the dedicated remove button.
+2. Re-scanning the same tag.
 
-\[
-T_{new} = T - P_r
-\]
-
-where \( P_r \) is the price of the removed product.
+This deliberate protocol prevents the false-additions and false-removals that often occur due to accidental or duplicate scans in single-action systems.
 
 ---
 
-## 📊 Experimental Results & Validation
-The prototype was tested under realistic conditions: 50 unique tags, 500 total scan attempts, with each tag presented at varying angles and distances to stress-test reliability.
+### 📊 Experimental Validation
+The prototype was tested under realistic conditions:
 
-**Key Metrics:**
-- **Detection Accuracy:** 99.6% (498 correct out of 500 scans)
-- **Billing Accuracy:** 99.8% (Verified across baskets of 3 to 15 items)
-- **Checkout Time Reduction:** 77.5% (8.0 min under conventional billing → 1.8 min with prototype)
-- **Power Consumption:** 65 mA total draw
-- **Battery Runtime:** ~8 hours continuous operation on a 2600mAh 18650 cell
+- 50 unique RFID tags
+- 500 total scan attempts
+- Tags presented at varying angles and distances to stress-test reliability.
+- Billing manually verified across baskets of 3 to 15 items.
 
-**Performance Comparison:**
+#### Key Quantitative Results
+| Metric | Result |
+| :--- | :--- |
+| **RFID Detection Accuracy** | 99.6% (498 out of 500) |
+| **Billing Accuracy** | 99.8% (Verified against manual totals) |
+| **Checkout Time Reduction** | 77.5% (8.0 mins → 1.8 mins) |
+| **Power Consumption** | 65 mA (Continuous operation) |
+| **Battery Runtime** | ~8 hours (On 2600mAh 18650 cell) |
 
-| Parameter | Conventional Billing | Existing RFID System | **Proposed System** |
+#### 🏆 Performance Comparison
+| Parameter | Conventional Billing | Existing RFID System | Proposed System |
 | :--- | :--- | :--- | :--- |
-| Checkout Time (min) | 8.0 | 4.0 | **1.8** |
-| Billing Accuracy (%) | 95.2 | 98.4 | **99.8** |
-| RFID Detection (%) | — | 98.9 | **99.6** |
-| Power Consumption (mA) | — | 90 | **65** |
-| Battery Operation | No | Limited | **Yes** |
-| Item Removal | Manual | No | **Yes** |
+| Checkout Time (min) | 8.0 | 4.0 | 1.8 |
+| Billing Accuracy (%) | 95.2 | 98.4 | 99.8 |
+| RFID Detection (%) | — | 98.9 | 99.6 |
+| Power Consumption (mA) | — | 90 | 65 |
+| Battery Operation | No | Limited | Yes |
+| Item Removal | Manual | No | Yes |
 
 ---
 
-## 🎓 Why This Matters for Research
-This project applies core embedded systems theory to a real-world problem with **actual, rigorous quantitative validation**. It demonstrates:
+### 🎓 Why This Matters for Research
+This project demonstrates a practical, low-power embedded solution to a real-world retail problem. It validates:
 
-- **Low-Power Embedded Design:** Achieving 65mA operation ensures all-day untethered use.
-- **Fault-Tolerant User Logic:** The two-step removal mechanism prevents user errors.
-- **Edge Computing:** Running the entire billing loop locally without cloud dependency is a critical IoT research direction.
-- **Scalable Platform:** The hardware base leaves clear room for future IoT connectivity, digital payments, and AI-driven analytics.
+- **Edge Computing:** Running the entire billing loop locally without cloud dependency.
+- **Fault-Tolerant User Logic:** Preventing accidental billing errors through the two-step removal protocol.
+- **Hardware Efficiency:** Achieving high accuracy (99.6%) and long battery life (8 hours) on a sub-$10 microcontroller.
 
----
+### 🔮 Future Scope
+This prototype serves as a stepping stone for commercial deployment. Future work includes:
 
-## 🔮 Future Scope
-This design is meant to be a stepping stone, not an endpoint:
-
-- **Cloud Integration:** Adding Wi-Fi or Bluetooth would allow real-time synchronization with store inventory databases.
-- **Digital Payments:** Integrating UPI, QR, or NFC support would enable fully cashier-less checkout.
-- **Fleet Management:** A central dashboard could monitor multiple trolleys simultaneously.
-- **Enhanced Verification:** Adding weight sensors would catch misplaced items that RFID alone might miss.
+- **Cloud Connectivity:** Adding Wi-Fi or Bluetooth for live inventory sync.
+- **Digital Payments:** Integrating UPI, QR, or NFC for fully cashier-less checkout.
+- **Fleet Management:** A central dashboard to monitor multiple trolleys.
+- **Enhanced Verification:** Weight sensors and lightweight vision to catch misplaced items.
 
 ---
 
-## 🧑‍💻 Author
-**Khatija Mahveen**
-- M.E. Embedded Systems & IoT | PhD Aspirant
-- Research Intern at DRDO - Research Centre Imarat (RCI)
-- Rank 1 in M.E. Embedded Systems
-- Paper submitted to INERTCON 2026
+### 🧑‍💻 Author
+**Khatija Mahveen**  
+M.E. Embedded Systems & IoT | PhD Aspirant  
+Research Intern at DRDO - Research Centre Imarat (RCI)  
+Rank 1 in M.E. Embedded Systems  
+Paper submitted to INERTCON 2026
 
-## 📜 License
+### 📜 License
 This project is licensed for academic and research purposes.
