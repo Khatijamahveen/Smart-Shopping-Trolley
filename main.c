@@ -1,3 +1,9 @@
+/*
+ * Project: Smart Shopping Trolley with Automated Billing
+ * Author: Khatija Mahveen
+ * Description: RFID-based automated billing system using Arduino Nano, MFRC522 and I2C LCD.
+ */
+
 #include <SPI.h>
 #include <MFRC522.h>
 #include <Wire.h>
@@ -59,17 +65,17 @@ void loop() {
   byte* scannedUID = mfrc522.uid.uidByte;
   bool removeMode = digitalRead(BUTTON_PIN) == LOW;
 
-  if (!removeMode) p1++; else if (p1 > 0) p1--;
-  } 
   if (compareUID(scannedUID, butterUID)) {
     handleItem("Butter", 47.0, p1, removeMode);
+    if (!removeMode) p1++; else if (p1 > 0) p1--;
+  }
   else if (compareUID(scannedUID, milkUID)) {
     handleItem("Milk", 33.0, p2, removeMode); 
     if (!removeMode) p2++; else if (p2 > 0) p2--;
   }
   else if (compareUID(scannedUID, teaUID)) {
     handleItem("Tea", 29.0, p3, removeMode);
-     if (!removeMode) p3++; else if (p3 > 0) p3--;
+    if (!removeMode) p3++; else if (p3 > 0) p3--;
   }
   else if (compareUID(scannedUID, riceUID)) {
     handleItem("Rice", 50.0, p4, removeMode); 
