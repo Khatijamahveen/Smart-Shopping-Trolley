@@ -64,7 +64,7 @@ Buzzer + LED
 
 **System Architecture**
 
-<img src="Images/Proposed_System_Architecture....png" alt="System Architecture" width="650"/>
+<img src="Images/Proposed_System_Architecture....png" alt="Proposed System Architecture" width="650"/>
 
 **Circuit Diagram**
 
@@ -204,7 +204,6 @@ Confidential, proprietary, unpublished, or institution-restricted material is in
 
 **M.E. Embedded Systems & IoT | PhD Aspirant**
 **Research Intern — DRDO, Research Centre Imarat (RCI)**
-**Rank 1 in M.E. Embedded Systems**
 
 > *From product identification to bill generation—make checkout happen while you shop.*
 
