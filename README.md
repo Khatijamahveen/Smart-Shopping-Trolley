@@ -8,12 +8,11 @@
 
 ## 📄 Research Publication
 
-**Khatija Mahveen**, Neeraja B., and Dr. T. Nagalaxmi.
-*“Design and Implementation of a Low-Power RFID-Based Smart Shopping Trolley with Real-Time Automated Billing.”*
+**Khatija Mahveen**, Dr. T. Nagalaxmi, Radha Vidatala
+*“Design and Implementation of a Low-Power, Cost-Effective RFID-Based Smart Shopping Trolley with Real-Time Automated Billing for Small-Scale Retail”*
 
-**Submitted:** August 2026
-**Conference:** 1st International Emerging Research and Technology Conference (INERTCON 2026)
-
+**Accepted:** September 2026
+**Conference:** 3rd International Conference on Electronic Circuits and Signaling Technologies (ICECST 2026), Lincoln University College, Malaysia. 
 ---
 
 ## 🔍 Problem & Proposed Solution
