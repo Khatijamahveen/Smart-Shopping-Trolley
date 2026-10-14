@@ -152,7 +152,6 @@ The prototype was evaluated using:
 
 This project demonstrates:
 
-* **Edge computing** through completely local billing
 * **Real-time embedded processing**
 * **RFID-based product identification**
 * **SPI communication** with the RFID reader
